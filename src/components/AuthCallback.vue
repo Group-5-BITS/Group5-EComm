@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { onMounted } from 'vue';
 // import { userManager } from '@/auth.config';
 
 export default {
