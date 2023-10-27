@@ -19,6 +19,7 @@
     "jquery": "^3.6.1",
     "jquery-confirm": "^3.3.4",
     "node-fetch": "^3.2.10",
+    "oidc-client": "^1.11.5",
     "pinia": "^2.0.22",
     "redaxios": "^0.5.1",
     "vue": "^3.2.13",
