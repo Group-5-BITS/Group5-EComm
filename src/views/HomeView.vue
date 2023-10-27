@@ -1,19 +1,17 @@
 <template>
   <div class="flex-row py-6">
-    <MainPage v-if="state" @search="searching"/>
+    <MainPage v-if="state" @search="searching" />
   </div>
-
 </template>
 <script>
 import MainPage from "../components/MainPage.vue";
-import NavBar from "../components/NavBar.vue";
 import axios from "redaxios";
 import { useCatalogStore } from "../utils/store.js";
+// import { userManager } from '../auth.config';
 
 export default {
   name: "App",
   components: {
-    NavBar,
     MainPage
   },
   data: () => ({
@@ -28,6 +26,14 @@ export default {
   methods: {
     async searching(name, id, min, max) {
       console.log(name, id);
+      // Check if the user is authenticated
+      // if (!userManager.getUser() || userManager.getUser().expired) {
+      //   // If not authenticated, initiate OIDC login
+      //   userManager.signinRedirect();
+      //   return;
+      // }
+
+
       if (typeof name !== "object") {
         console.log("This function was called " + name);
         this.searchText = name;
