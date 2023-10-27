@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import Callback from "@/components/Callback.vue";
+import AuthCallback from "../components/AuthCallback.vue";
 
 const routes = [
   {
@@ -11,7 +11,7 @@ const routes = [
   {
     path: "/callback",
     name: "callback",
-    component: Callback,
+    component: AuthCallback,
   },
   // Add any other routes you need
 ];
