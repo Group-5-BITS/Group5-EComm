@@ -38,18 +38,7 @@
                         </configuration>
                     </execution>
 
-                    <!-- Execution 3: Run 'npm run serve' (or other npm scripts as needed) -->
-                    <execution>
-                        <id>npm serve</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>run serve</arguments>
-                        </configuration>
-                    </execution>
-
-                    <!-- Execution 4: Run 'npm run build' -->
+                    <!-- Execution 3: Run 'npm run build' -->
                     <execution>
                         <id>npm build</id>
                         <goals>
@@ -57,6 +46,17 @@
                         </goals>
                         <configuration>
                             <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+
+                    <!-- Execution 4: Run 'npm run serve' (or other npm scripts as needed) -->
+                    <execution>
+                        <id>npm serve</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run serve</arguments>
                         </configuration>
                     </execution>
 
