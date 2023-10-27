@@ -7,7 +7,7 @@
 import MainPage from "../components/MainPage.vue";
 import axios from "redaxios";
 import { useCatalogStore } from "../utils/store.js";
-import { userManager } from '@/auth.config';
+// import { userManager } from '../auth.config';
 
 export default {
   name: "App",
@@ -27,11 +27,11 @@ export default {
     async searching(name, id, min, max) {
       console.log(name, id);
       // Check if the user is authenticated
-      if (!userManager.getUser() || userManager.getUser().expired) {
-        // If not authenticated, initiate OIDC login
-        userManager.signinRedirect();
-        return;
-      }
+      // if (!userManager.getUser() || userManager.getUser().expired) {
+      //   // If not authenticated, initiate OIDC login
+      //   userManager.signinRedirect();
+      //   return;
+      // }
 
 
       if (typeof name !== "object") {

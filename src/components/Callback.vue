@@ -6,15 +6,15 @@
 
 <script>
 import { onMounted } from 'vue';
-import { userManager } from '@/auth.config';
+// import { userManager } from '@/auth.config';
 
 export default {
   name: 'AuthCallback',
   setup() {
-    onMounted(async () => {
-      await userManager.signinRedirectCallback();
-      // After a successful login, you can redirect the user to another route or do other actions.
-    });
+    // onMounted(async () => {
+    //   await userManager.signinRedirectCallback();
+    //   // After a successful login, you can redirect the user to another route or do other actions.
+    // });
 
     return {};
   },

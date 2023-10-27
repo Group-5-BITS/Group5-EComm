@@ -50,7 +50,7 @@
               </span>
             </router-link>
           </li>
-          <a
+          <a @click="login"
             class="ml-8 whitespace-nowrap text-4xl font-medium text-gray-500 hover:text-gray-900"
             href="#"
           >Sign in</a
@@ -101,7 +101,7 @@
               </router-link>
             </div>
             <div class="mt-6 px-5">
-              <a @click="loginWithOIDC"
+              <a
                 class="block text-center w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:from-teal-600 hover:to-cyan-700"
                 href="#"
               >Sign In</a
@@ -124,7 +124,8 @@
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { useCatalogStore } from "../utils/store.js";
-import { userManager } from '@/auth.config';
+// import { userManager } from '../auth.config';
+import { useAuth0 } from "@auth0/auth0-vue";
 
 export default {
   name: "NavBar",
@@ -140,9 +141,14 @@ export default {
     XMarkIcon
   },
   setup: () => {
+    const { loginWithRedirect } = useAuth0();
+
     const store = useCatalogStore();
     return {
-      store
+      store,
+      login() {
+        loginWithRedirect();
+      }
     };
   },
   methods: {
@@ -155,9 +161,9 @@ export default {
     },
     fetchQuote() {
     },
-    loginWithOIDC() {
-      userManager.signinRedirect();
-    },
+    // loginWithOIDC() {
+    //   userManager.signinRedirect();
+    // },
   }
 };
 </script>
