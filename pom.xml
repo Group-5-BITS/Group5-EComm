@@ -1,0 +1,77 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example</groupId>
+    <artifactId>frontend-app</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging> <!-- Use "war" packaging to build a web application -->
+
+    <!-- Configure the frontend-maven-plugin -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.11.2</version> <!-- Use the latest version -->
+                <configuration>
+                    <workingDirectory>src</workingDirectory> <!-- Your Vue.js project directory -->
+
+                    <!-- Define the Node.js version -->
+                    <nodeVersion>v18.15.0</nodeVersion>
+                </configuration>
+                <executions>
+                    <!-- Execution 1: Install Node.js and npm -->
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- Execution 2: Run 'npm install' -->
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+
+                    <!-- Execution 3: Run 'npm run serve' (or other npm scripts as needed) -->
+                    <execution>
+                        <id>npm serve</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run serve</arguments>
+                        </configuration>
+                    </execution>
+
+                    <!-- Execution 4: Run 'npm run build' -->
+                    <execution>
+                        <id>npm build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+
+                    <!-- Execution 5: Run 'npm run lint' (or other npm scripts as needed) -->
+                    <execution>
+                        <id>npm lint</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run lint</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
