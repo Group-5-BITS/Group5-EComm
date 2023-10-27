@@ -7,7 +7,6 @@
 import MainPage from "../components/MainPage.vue";
 import axios from "redaxios";
 import { useCatalogStore } from "../utils/store.js";
-// import { userManager } from '../auth.config';
 
 export default {
   name: "App",
