@@ -13,9 +13,9 @@ app.use(createPinia());
 app.use(router);
 app.use(
     createAuth0({
-      domain: 'dev-v8v2au3mfnnro6js.us.auth0.com',
-      client_id: 'S9BCegL7uWUcbNzeDZUtoPV5hSVVMjYu',
-      redirect_uri: window.location.origin,
+      domain: 'group5-devops.us.auth0.com',
+      client_id: '00eFFR9Cqp3m8jopkGJVdvfrDaHJeOWa',
+      redirect_uri: 'https://13.50.62.21:5173/callback',
     }),
   );
 app.mount("#app");
