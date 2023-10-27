@@ -1,5 +1,4 @@
 <template>
-  <NavBar />
   <div class="flex-row py-6">
     <MainPage v-if="state" @search="searching"/>
   </div>
