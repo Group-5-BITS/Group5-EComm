@@ -1,7 +1,8 @@
 import { createRouter as createVueRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import Profile from "../views/Profile.vue";
-import AuthCallback from "../components/AuthCallback.vue";
+import Checkout from "../views/CheckoutPage.vue"
+import ProductGrid from "../views/ProductGrid.vue"
+import ProductPage from "../views/ProductPage.vue"
 import { createAuthGuard } from "@auth0/auth0-vue";
 
 export function createRouter(app) {
@@ -13,14 +14,21 @@ export function createRouter(app) {
         component: HomeView,
       },
       {
-        path: "/callback",
-        name: "callback",
-        component: AuthCallback,
+        path: "/checkout",
+        name: "checkout",
+        component: Checkout,
+        beforeEnter: createAuthGuard(app),
       },
       {
-        path: "/profile",
-        name: "profile",
-        component: Profile,
+        path: "/productGrid",
+        name: "productGrid",
+        component: ProductGrid,
+        beforeEnter: createAuthGuard(app),
+      },
+      {
+        path: "/product",
+        name: "product",
+        component: ProductPage,
         beforeEnter: createAuthGuard(app),
       },
     ],
