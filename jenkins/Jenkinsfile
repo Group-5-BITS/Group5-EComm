@@ -1,17 +1,29 @@
 pipeline {
     agent any
     tools { 
-      maven 'mvn' 
+        maven 'mvn' 
     }
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                script {
+                    if (isUnix()) {
+                        sh 'mvn -B -DskipTests clean package'
+                    } else {
+                        bat 'mvn -B -DskipTests clean package'
+                    }
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                script {
+                    if (isUnix()) {
+                        sh 'mvn test'
+                    } else {
+                        bat 'mvn test'
+                    }
+                }
             }
             post {
                 always {
@@ -21,9 +33,14 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver.bat'
+                script {
+                    if (isUnix()) {
+                        sh './jenkins/scripts/deliver.sh'
+                    } else {
+                        bat '.\\jenkins\\scripts\\deliver.bat'
+                    }
+                }
             }
         }
     }
-
 }
