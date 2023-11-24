@@ -8,35 +8,37 @@ const fs = require('fs/promises');
 @Injectable()
 export class OnSearchService {
   async create(searchResponse: onSearchResponse) {
-    // await fs.writeFile('../log.txt', JSON.stringify(searchResponse.message, null, 10), { flag: 'a+' });
-
 
     let mongoClient = databaseUtils.mongoClient
       ? databaseUtils.mongoClient
       : await databaseUtils.connectToCluster(process.env.URI);
     const collection = mongoClient.db("Beckn").collection("bap_client");
-    console.log(searchResponse.context.bpp_id)
+    console.log(searchResponse.context.bpp_id);
+    console.log(searchResponse.context);
+
     try {
       searchResponse.message.catalog.bpp_descriptor =
         searchResponse.message.catalog["bpp/descriptor"];
       searchResponse.message.catalog.bpp_providers =
         searchResponse.message.catalog["bpp/providers"];
+    } catch (e) {
+      // console.log(searchResponse);
+      console.log(e);
     }
-    catch (e) {
-      console.log(searchResponse)
-      console.log(e)
-    }
+    console.log(searchResponse.context);
     let items: Array<any> = [];
     searchResponse.message?.catalog?.bpp_providers.forEach((provider): any => {
       let item;
       provider.items.forEach((value, index): any => {
         item = {
           provider_id: searchResponse.context.bpp_id,
+          bppURI: searchResponse.context.bpp_uri,
           images: value.descriptor.images,
           short_desc: value.descriptor.short_desc,
           long_desc: value.descriptor.long_desc,
           categories: provider?.categories,
           category: provider?.categories?.find((category) => {
+            console.log(index);
             return category?.id === value?.category_id;
           })?.descriptor.name,
           provider_name: provider.descriptor.name,
@@ -55,7 +57,7 @@ export class OnSearchService {
         items
       }
     };
-
+    console.log(items[0]);
     await collection.insertOne(insertDocument);
     return insertDocument;
   }
@@ -100,7 +102,7 @@ export class OnSearchService {
     const collection = mongoClient.db("Beckn").collection("bap_client");
 
     const cursor = collection.aggregate(agg);
-    return await cursor.toArray();
+    return cursor.toArray();
   }
 
   update(id: number, updateOnSearchDto: UpdateOnSearchDto) {
