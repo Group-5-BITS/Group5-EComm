@@ -1,45 +1,34 @@
 pipeline {
     agent any
-    tools { 
-        maven 'mvn' 
-    }
     stages {
         stage('Build') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'mvn -B -DskipTests clean package'
-                    } else {
-                        bat 'mvn -B -DskipTests clean package'
-                    }
+                // Navigate to the 'clients' folder
+                dir('clients') {
+                    // Run Maven build from the 'clients' folder
+                    sh 'mvn -B -DskipTests clean package'
                 }
             }
         }
         stage('Test') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'mvn test'
-                    } else {
-                        bat 'mvn test'
-                    }
+                // Navigate to the 'clients' folder
+                dir('clients') {
+                    // Run Maven test from the 'clients' folder
+                    sh 'mvn test'
                 }
             }
             post {
                 always {
+                    // JUnit report from the 'clients' folder
                     junit 'target/surefire-reports/*.xml'
                 }
             }
         }
         stage('Deliver') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh './jenkins/scripts/deliver.sh'
-                    } else {
-                        bat '.\\jenkins\\scripts\\deliver.bat'
-                    }
-                }
+                // Run deliver.sh script from the project root
+                sh './deliver.sh'
             }
         }
     }
