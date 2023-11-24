@@ -28,7 +28,7 @@ pipeline {
         stage('Deliver') {
             steps {
                 // Run deliver.sh script from the project root
-                sh './deliver.sh'
+                sh './deliver.bat'
             }
         }
     }
