@@ -1,34 +1,27 @@
 pipeline {
     agent any
+    tools { 
+      maven 'mvn' 
+    }
     stages {
         stage('Build') {
             steps {
-                // Navigate to the 'clients' folder
-                dir('clients') {
-                    // Run Maven build from the 'clients' folder
-                    sh 'mvn -B -DskipTests clean package'
-                }
+                bat 'mvn -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
-                // Navigate to the 'clients' folder
-                dir('clients') {
-                    // Run Maven test from the 'clients' folder
-                    sh 'mvn test'
-                }
+                bat 'mvn test'
             }
             post {
                 always {
-                    // JUnit report from the 'clients' folder
                     junit 'target/surefire-reports/*.xml'
                 }
             }
         }
         stage('Deliver') {
             steps {
-                // Run deliver.sh script from the project root
-                 bat '.\\jenkins\\scripts\\deliver.bat'
+                bat '.\\jenkins\\scripts\\deliver.bat'
             }
         }
     }
