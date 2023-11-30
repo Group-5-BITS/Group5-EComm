@@ -23,3 +23,12 @@ pnpm-debug.log*
 *.sln
 *.sw?
 client/dist
+.scannerwork/.sonar_lock
+.scannerwork/report-task.txt
+client/src/node/node
+client/src/node/npm
+client/src/node/npm.cmd
+secrets/server.crt
+secrets/server.csr
+secrets/server.key
+secrets/server.pem
