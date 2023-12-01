@@ -49,6 +49,7 @@ export const useCatalogStore = defineStore("catalog", {
           headers: {
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'skip'
           },
         },
       );

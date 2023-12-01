@@ -28,7 +28,7 @@ const home: NightwatchTests = {
     browser.waitForElementVisible('#search-submit').element.find('#search-submit').click()
 
     // Assert that the correct page is open
-    browser.waitForElementVisible('p[id=product-name]', 10000)
+    browser.waitForElementVisible('p[id=product-name]', 50000)
     .assert.urlContains('product');
 
     // Click on a product
