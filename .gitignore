@@ -51,3 +51,4 @@ client/tests_output/test/FIREFOX_120.0.1__Search.test.json
 client/tests_output/test/FIREFOX_120.0.1__Search.test.xml
 client/tests_output/test/FIREFOX_120.0.1__SignIn.test.json
 client/tests_output/test/FIREFOX_120.0.1__SignIn.test.xml
+package-lock.json
