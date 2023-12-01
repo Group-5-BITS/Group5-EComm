@@ -58,8 +58,9 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'ssl_crt', variable: 'SSL_CERT'), file(credentialsId: 'ssl_key', variable: 'SSL_KEY')]) {
                     sh 'mkdir -p secrets'
-                    sh "cp $SSL_CERT secrets"
-                    sh "cp $SSL_KEY secrets"
+                    sh 'chmod +w secrets'
+                    sh "cp ${SSL_CERT} secrets/"
+                    sh "cp ${SSL_KEY} secrets/"
                 }
                 
                 withCredentials([usernamePassword(credentialsId: 'docker_cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
