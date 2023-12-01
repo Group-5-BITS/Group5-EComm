@@ -65,7 +65,7 @@ pipeline {
                 
                 withCredentials([usernamePassword(credentialsId: 'docker_cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         // Your steps that require credentials go here
-                        sh "docker login --username $USERNAME --password $PASSWORD"
+                        sh 'docker login --username $USERNAME --password $PASSWORD'
                     }
                     
                 sh 'docker build -t kshitiz17/group5 .'
