@@ -6,9 +6,9 @@ export const useCatalogStore = defineStore("catalog", {
   state: () => ({
     messageId: useStorage("messageId", null),
     catalog: null,
-    item: useStorage("item", null),
-    cart: useStorage("cart", []),
-    BAP_URI: "https://localhost:5173",
+    item: null,
+    cart: [],
+    BAP_URI: "https://solid-elf-incredibly.ngrok-free.app",
     gps: null,
     currencySymbol: "₹",
     currency: null,
@@ -49,6 +49,7 @@ export const useCatalogStore = defineStore("catalog", {
           headers: {
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'skip'
           },
         },
       );

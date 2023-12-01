@@ -1,29 +1,75 @@
 pipeline {
     agent any
-    tools { 
-      maven 'mvn' 
-    }
+
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                // Manually checkout source code using Git
+                git 'https://github.com/Group-5-BITS/Group5-EComm'
             }
         }
-        stage('Test') {
+        stage('Build Frontend') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
+                dir('client') {
+                    // Build Vue.js + Vite frontend
+                    sh 'npm install'
+                    sh 'npm run build'
                 }
             }
         }
-        stage('Deliver') {
+        stage('Build Backend') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                dir('backend') {
+                    // Build Nest.js backend
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            parallel {
+                stage('Test in Firefox') {
+                    steps {
+                        catchError(buildResult: 'SUCCESS') {
+                            dir('client') {
+                                // Run Nightwatch tests in Firefox
+                                sh 'npm install'
+                                sh 'npm run test:firefox'
+                            }
+                        }
+                    }
+                }
+                stage('Test in Chrome') {
+                    steps {
+                        catchError(buildResult: 'SUCCESS') {
+                            dir('client') {
+                                // Run Nightwatch tests in Firefox
+                                sh 'npm install'
+                                sh 'npm run test:chrome'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                withCredentials([file(credentialsId: 'ssl_crt', variable: 'SSL_CERT'), file(credentialsId: 'ssl_key', variable: 'SSL_KEY')]) {
+                    sh 'mkdir secrets'
+                    sh "cp $SSL_CERT secrets"
+                    sh "cp $SSL_KEY secrets"
+                }
+                
+                withCredentials([usernamePassword(credentialsId: 'docker_cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        // Your steps that require credentials go here
+                        sh "docker login --username $USERNAME --password $PASSWORD"
+                    }
+                    
+                sh 'docker build -t kshitiz17/group5 .'
+                sh 'docker push kshitiz17/group5:latest'
             }
         }
     }
-
 }

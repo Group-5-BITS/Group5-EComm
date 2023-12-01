@@ -1,20 +1,6 @@
 <template>
   <main class="item">
     <section class="img">
-      <!--      <button class="img-main__btnlft img-main__btn">-->
-      <!--        <img-->
-      <!--          src="../assets/icon-next.svg"-->
-      <!--          alt="next symbol image"-->
-      <!--          class="img-main__btnlft-img img-main__btn-img"-->
-      <!--        />-->
-      <!--      </button>-->
-      <!--      <button class="img-main__btnrgt img-main__btn">-->
-      <!--        <img-->
-      <!--          src="../assets/icon-next.svg"-->
-      <!--          alt="next symbol image"-->
-      <!--          class="img-main__btnrgt-img img-main__btn-img"-->
-      <!--        />-->
-      <!--      </button>-->
       <div>
         <img
           :src="itemDetail.images[imageIndex]"
@@ -36,9 +22,9 @@
     </section>
 
     <section class="price">
-      <h2 class="price-sub__heading cursor-pointer" @click="openProviderCatalog(itemDetail.provider_name)">
+      <h2 id="provider-name" class="price-sub__heading cursor-pointer" @click="openProviderCatalog(itemDetail.provider_name)">
         {{ itemDetail.provider_name }}</h2>
-      <h1 class="text-5xl font-bold">{{ itemDetail.name }}</h1>
+      <h1 id="product-name" class="text-5xl font-bold">{{ itemDetail.name }}</h1>
       <p class="text-2xl text-gray-500 font-semibold">
         {{ itemDetail.long_desc }}<br />{{ itemDetail.short_desc }}
       </p>
@@ -60,15 +46,15 @@
       <div class="price-btnbox">
         <div class="price-btns">
 
-          <button class="price-btn__remove price-btn h-5" @click="itemRemove">
+          <button id="remove-item-count" class="price-btn__remove price-btn h-5" @click="itemRemove">
             <img
               alt="minus sign"
               class="price-btn__remove-img price-btn__img"
               src="../assets/icon-minus.svg"
             />
           </button>
-          <span class="price-btn__txt">{{ itemCount }}</span>
-          <button class="price-btn__add price-btn" @click="itemAdd">
+          <span id="item-count" class="price-btn__txt">{{ itemCount }}</span>
+          <button id="add-item-count"  class="price-btn__add price-btn" @click="itemAdd">
             <img
               alt="plus sign"
               class="price-btn__add-img price-btn__img"
@@ -77,7 +63,7 @@
           </button>
 
         </div>
-        <button class="price-cart__btn btn--orange" @click="addToCart">
+        <button id="add-to-cart" class="price-cart__btn btn--orange" @click="addToCart">
           <img
             src="../assets/icon-cart.svg"
             alt="cart image"
@@ -131,30 +117,6 @@ export default {
     this.itemDetail = this.store.item;
     console.log(this.itemDetail);
   },
-  // async created() {
-  //   // this.interval = setInterval(this.refreshData, 5000)
-  //   // setTimeout(()=> clearInterval(this.interval), 25000)
-  //   console.log(this)
-  //   // let response = await axios.get(`http://localhost:3000/api/on_search/${this.messageId}`);
-  //   this.itemDetail = [{
-  //     "provider_id": "./retail.kirana/ind.blr/82@mandi.succinct.in.provider",
-  //     "images": [
-  //       "https://mandi.succinct.in/attachments/view/171.jpg"
-  //     ],
-  //     "short_desc": null,
-  //     "long_desc": null,
-  //     "category": null,
-  //     "provider_name": "Wiggles",
-  //     "provider_location": "18.567230,73.760810",
-  //     "name": "YKibble™ Oven Baked Dry Food (Puppy 1kg)-Each",
-  //     "id": "./retail.kirana/ind.blr/231@mandi.succinct.in.item",
-  //     "price": {
-  //       "listed_value": "659.0",
-  //       "currency": "INR",
-  //       "value": "659.0"
-  //     },
-  //   }][0]
-  // },
   methods: {
     itemAdd() {
       this.itemCount++;

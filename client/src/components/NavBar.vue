@@ -13,6 +13,7 @@
 
           <li v-if="!isAuthenticated && !isLoading" class="nav-item">
             <button @click.prevent="login"
+              id="signin"
               class="ml-8 whitespace-nowrap text-4xl font-medium text-gray-500 hover:text-gray-900">Sign in</button>
           </li>
           <div v-if="isAuthenticated" class="pl-2 flex items-center">
@@ -20,9 +21,9 @@
               to="/">
               <img class="w-10 h-10 rounded-full" :src="user.picture" alt="user photo">
             </router-link>
-            <span class="pl-4 self-center text-2xl font-semibold whitespace-nowrap dark:text-gray-900"> Welcome {{ user.given_name }}!</span>
+            <span class="pl-4 self-center text-2xl font-semibold whitespace-nowrap dark:text-gray-900"> Welcome {{ user.given_name ||user.nickname}}!</span>
             <li class="font-sans block mt-4 lg:inline-block lg:mt-0 lg:ml-6 align-middle text-black hover:text-gray-700">
-            <router-link class=" relative flex whitespace-nowrap text-4xl font-medium text-gray-500 hover:text-gray-900"
+            <router-link id="cart" class=" relative flex whitespace-nowrap text-4xl font-medium text-gray-500 hover:text-gray-900"
               to="/cart">
               <svg aria-hidden="true"
                 class="h-10 p-1 hover:text-green-500 duration-200 svg-inline--fa fa-shopping-cart fa-w-18 fa-7x"
@@ -41,7 +42,7 @@
           </li>
           </div>
           <ul id="mobileAuthNavBar" class="navbar-nav d-md-none d-flex" v-if="isAuthenticated">
-            <button @click.prevent="logout"
+            <button id="logout" @click.prevent="logout"
               class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-4xl font-medium text-white shadow-sm hover:bg-indigo-700">Log Out</button>
           </ul>
         </div>

@@ -29,7 +29,7 @@ export class OnSearchService {
     let items: Array<any> = [];
     searchResponse.message?.catalog?.bpp_providers.forEach((provider): any => {
       let item;
-      provider.items.forEach((value, index): any => {
+      provider.items?.forEach((value, index): any => {
         item = {
           provider_id: searchResponse.context.bpp_id,
           bppURI: searchResponse.context.bpp_uri,

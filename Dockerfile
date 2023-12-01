@@ -1,10 +1,11 @@
 FROM node:16 as ui
-WORKDIR /usr/src/ONDC
+WORKDIR /usr/src/group5
 COPY client/ .
+COPY secrets/ .
 RUN npm install
-RUN npm run dev build
+RUN npm run build
 
-FROM node:16 as server
+FROM node:18 as server
 
 # Create app directory
 WORKDIR /root
@@ -20,9 +21,9 @@ RUN npm ci --only=production
 
 # Bundle app source
 COPY . .
-COPY --from=ui /usr/src/ONDC/dist ./client/dist
+COPY --from=ui /usr/src/group5/dist ./client/dist
 
-EXPOSE 1123
+EXPOSE 5173
 
 RUN npm run build
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:prod"]
