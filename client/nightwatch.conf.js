@@ -85,7 +85,7 @@ module.exports = {
           acceptInsecureCerts: true,
           'moz:firefoxOptions': {
             args: [
-              // '-headless',
+               '-headless',
               // '-verbose'
             ]
           }
@@ -117,7 +117,7 @@ module.exports = {
             //'--allow-insecure-localhost',
             //'--ignore-ssl-errors',
             //'--allow-running-insecure-content'
-            //'--headless'
+            '--headless'
           ]
         }
       },

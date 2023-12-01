@@ -26,4 +26,4 @@ COPY --from=ui /usr/src/group5/dist ./client/dist
 EXPOSE 5173
 
 RUN npm run build
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:prod"]

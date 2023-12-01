@@ -48,7 +48,8 @@ const home: NightwatchTests = {
     .click();
 
     // Assert product page opened
-    browser.assert
+    browser.waitForElementVisible('#add-item-count', 50000)
+    .assert
     .urlContains('item')
     
     // Assert right product opened
