@@ -6,8 +6,8 @@ export const useCatalogStore = defineStore("catalog", {
   state: () => ({
     messageId: useStorage("messageId", null),
     catalog: null,
-    item: useStorage("item", null),
-    cart: useStorage("cart", []),
+    item: null,
+    cart: [],
     BAP_URI: "https://localhost:5173",
     gps: null,
     currencySymbol: "₹",

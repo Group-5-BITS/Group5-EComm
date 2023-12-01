@@ -46,10 +46,10 @@
             <img :src="item.images[0]" alt="" class="h-24" />
           </div>
           <div class="flex flex-col justify-between ml-4 flex-grow">
-            <span class="font-bold text-2xl" @click="openItem(index, item)">{{
+            <span id="product-name" class="font-bold text-2xl" @click="openItem(index, item)">{{
                 item.name
               }}</span>
-            <span class="text-red-500 text-lg">{{ item.provider_name }}</span>
+            <span id="provider-name" class="text-red-500 text-lg">{{ item.provider_name }}</span>
             <a
               class="font-semibold hover:text-red-500 text-gray-500 text-lg z-10"
               href="#"
@@ -70,6 +70,7 @@
           </svg>
 
           <input
+            id="item-count"
             v-model="item.count"
             class="mx-2 border text-center w-14"
             type="text"
@@ -113,6 +114,7 @@
           <span>{{store.currencySymbol[store.currency]}}{{ store.getTotalPrice }}</span>
         </div>
         <router-link
+          id="checkout"
           class="flex justify-center bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-2xl text-white uppercase w-full"
           to="/summary"
         >

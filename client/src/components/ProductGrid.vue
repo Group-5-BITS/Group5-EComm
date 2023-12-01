@@ -9,6 +9,7 @@
     >
 
     <li
+        id="product"
         class="w-72 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl cursor-pointer place-content-around"
         v-for="(product, index) in store.getFilteredCatalog"
         :key="index"
@@ -30,10 +31,11 @@
 
         <div class="px-4 py-3 w-72">
           <span
+            id="provider-name"
             class="text-gray-400 mr-3 uppercase text-sm font-semibold text-orange-500"
             >{{ product.provider_name }}</span
           >
-          <p class="text-lg font-bold text-black truncate block capitalize">
+          <p id="product-name" class="text-lg font-bold text-black truncate block capitalize">
             {{ product.name }}
           </p>
           <div class="flex items-center">
