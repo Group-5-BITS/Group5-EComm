@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Manually checkout source code using Git
-                git branch: 'kshitiz', url: 'https://github.com/Group-5-BITS/Group5-EComm'
+                git 'https://github.com/Group-5-BITS/Group5-EComm'
             }
         }
         stage('Build Frontend') {
