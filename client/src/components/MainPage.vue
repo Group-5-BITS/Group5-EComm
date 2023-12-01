@@ -114,6 +114,7 @@
         </div>
       </div>
       <button
+        id="search-submit"
         type="button"
         @click="$emit('search', searchText, selected.id, min, max)"
         class="flex whitespace-nowrap items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

@@ -59,26 +59,8 @@ export class GetCatalogService {
     // const authHeader = await auth.createAuthorizationHeader(request);
     let header = {
       "Content-Type": "application/json"
-      // 'Authorization': authHeader[0]
     };
-    // let subs = {
-    //   subscriber_id: process.env.BAP_ID,
-    //   subscriber_url: process.env.BAP_URI,
-    //   type: 'BAP',
-    //   signing_public_key: process.env.SIGNING_PUBLIC_KEY,
-    //   valid_until: authHeader[1],
-    // };
-    // const verify = await auth.verifyHeader(authHeader[0], subs, request);
-    // console.log(authHeader);
 
-    // try {
-    //   let response2 = await axios.post("https://bpp.testing.tvast.in/search", request, { headers: header })
-    //   console.log(response2.data)
-    // }
-    // catch (e) {
-    //   console.log(e)
-    //
-    // }
     let searchUri = process.env.GATEWAY_URI ?? process.env.BPP_URI;
     let response = await axios.post(searchUri + "search", request, { headers: header });
 

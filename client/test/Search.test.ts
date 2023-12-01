@@ -24,7 +24,8 @@ const home: NightwatchTests = {
 
     // Simulate searching by product name
     browser.element.find('input[type="search"]')
-    .sendKeys(['Wheat', browser.Keys.ENTER])
+    .sendKeys(['Wheat'])
+    browser.waitForElementVisible('#search-submit').element.find('#search-submit').click()
 
     // Assert that the correct page is open
     browser.waitForElementVisible('p[id=product-name]', 10000)

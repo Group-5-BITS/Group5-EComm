@@ -6,7 +6,10 @@
     "serve": "vite serve --host",
     "build": "vite build",
     "lint": "vue-cli-service lint",
-    "dev": "vite dev --host"
+    "dev": "vite dev --host",
+    "test": "nightwatch test",
+    "test:chrome": "nightwatch test --env=chrome",
+    "test:firefox": "nightwatch test --env=firefox"
   },
   "dependencies": {
     "@auth0/auth0-vue": "^2.3.1",
