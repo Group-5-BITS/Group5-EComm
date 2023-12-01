@@ -1,29 +1,68 @@
 pipeline {
     agent any
-    tools { 
-      maven 'mvn' 
+
+    environment {
+        NODEJS_HOME = tool 'Node.js'
+        NPM_HOME = sh(script: 'npm config get prefix', returnStdout: true).trim()
+        PATH = "${NODEJS_HOME}/bin:${NPM_HOME}/bin:${PATH}"
     }
+
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                // Checkout your repository
+                checkout scm
             }
         }
-        stage('Test') {
+
+        stage('Build Backend') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
+                dir('backend') {
+                    // Build Nest.js backend
+                    sh 'npm install'
+                    sh 'npm run build'
                 }
             }
         }
-        stage('Deliver') {
+
+        stage('Build Frontend') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                dir('client') {
+                    // Build Vue.js + Vite frontend
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            parallel {
+                stage('Test in Firefox') {
+                    steps {
+                        dir('client') {
+                            // Run Nightwatch tests in Firefox
+                            sh 'npm install'
+                            sh 'npm run test:firefox'
+                        }
+                    }
+                }
+                stage('Test in Chrome') {
+                    steps {
+                        dir('client') {
+                            // Run Nightwatch tests in Chrome
+                            sh 'npm install'
+                            sh 'npm run test:chrome'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Perform deployment steps (e.g., push to a server, deploy to a cloud platform, etc.)
+                // You might need to customize this based on your deployment target
             }
         }
     }
-
 }
