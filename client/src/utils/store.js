@@ -8,7 +8,7 @@ export const useCatalogStore = defineStore("catalog", {
     catalog: null,
     item: null,
     cart: [],
-    BAP_URI: "https://localhost:5173",
+    BAP_URI: "https://solid-elf-incredibly.ngrok-free.app",
     gps: null,
     currencySymbol: "₹",
     currency: null,
